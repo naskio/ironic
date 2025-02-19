@@ -1,0 +1,57 @@
+{% extends "!layout.html" %}
+
+{% block extrahead %}
+{{ super() }}
+<!-- DocSearch styling -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"/>
+<style>
+    .search-container {
+        display: none !important;
+    }
+
+    .search-container-mobile {
+        display: none !important;
+    }
+
+    :root {
+        --docsearch-primary-color: #30739C;
+    }
+
+    .docsearch-container {
+        display: flex !important;
+        margin: 10px 0;
+    }
+
+    .DocSearch-Button {
+        border: none;
+    }
+
+    .DocSearch-Button-Keys {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+<!-- DocSearch JS -->
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+<script type="text/javascript">
+    // replace default search with docsearch
+    const searchIcon = document.querySelector('.search-icon');
+    if (searchIcon) {
+        for (let cssClass of searchIcon.classList) {
+            searchIcon.classList.remove(cssClass);
+        }
+        searchIcon.innerHTML = ``;
+        searchIcon.classList.add('docsearch-container');
+        docsearch({
+            appId: "29P8SDNIB4",
+            apiKey: "625766bd2362b7d8e557c007c797523d",
+            indexName: "naskioio",
+            container: ".docsearch-container",
+            debug: false
+        });
+    }
+</script>
+{% endblock %}
